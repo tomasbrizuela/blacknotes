@@ -13,11 +13,11 @@ body{
     height: 350px;
 }
 
-// #d{
-//     height: 150px;
-// }
+.container-fluid{
+    height: auto;
+}
 .row{
-    height: 500px;
+    height: auto;
 }
 
 h1{
@@ -28,8 +28,12 @@ h1{
 }
 
 #newNote{
+    position: absolute;
+    margin-bottom: 100px;
+    top: 25%;
+    right: 35%;
     border-radius: 8px;
-    box-shadow: 0px 0px 5px rgb(167, 167, 167);
+    box-shadow: 0px 0px 3px rgb(167, 167, 167);
     color: #bdbdbd;
 }
 
@@ -44,8 +48,12 @@ textarea{
     resize: none;
     width: 400px; 
     field-sizing: content;
+    max-height: 250px;
     outline: none; 
     border-radius: 8px;
+    overflow: visible;
+    scrollbar-color: rgb(103, 102, 102) rgb(0, 0, 0);
+    scrollbar-width:thin;
 }
 
 i{
@@ -58,10 +66,30 @@ p{
     font-size: 14px;
     line-height: 20px;
     cursor: pointer;
-    font-weight: 600;
+}
+
+#barra{
+    color: grey;
+    cursor: auto;
 }
 
 i:hover, p:hover{
     transform: scale(1.1);
     transition: 0.3s ease;
+}
+
+
+#tags p{
+    font-size: 12px;
+}
+
+textarea::selection {
+    background: #616060; /* Color de fondo para el texto seleccionado */
+    color: #000;        /* Color del texto seleccionado */
+}
+
+
+#d:hover{
+        width: 150px;
+        transition: 0.3s ease;
 }
