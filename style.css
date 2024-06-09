@@ -64,9 +64,13 @@ textarea {
     top: 20%;
   }
   textarea {
+    font-size: 18px;
     width: 300px;
     min-height: 150px;
     max-height: 400px;
+  }
+  body {
+    font-size: 18px;
   }
 }
 i {
