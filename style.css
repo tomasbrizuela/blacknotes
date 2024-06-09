@@ -3,18 +3,23 @@
 body {
   background-color: black;
   color: white;
-}
-
-.container-fluid {
-  height: 350px;
+  overflow: hidden visible;
+  scrollbar-color: rgb(103, 102, 102) rgb(0, 0, 0);
+  scrollbar-width: thin;
 }
 
 .container-fluid {
   height: auto;
+  overflow: visible;
+  scrollbar-color: rgb(103, 102, 102) rgb(0, 0, 0);
+  scrollbar-width: thin;
 }
 
 .row {
   height: auto;
+  overflow: visible;
+  scrollbar-color: rgb(103, 102, 102) rgb(0, 0, 0);
+  scrollbar-width: thin;
 }
 
 h1 {
@@ -26,13 +31,13 @@ h1 {
 }
 
 #newNote {
-  position: absolute;
+  position: fixed;
   margin-bottom: 100px;
   top: 25%;
-  right: 35%;
   border-radius: 8px;
   box-shadow: 0px 0px 3px rgb(167, 167, 167);
   color: #bdbdbd;
+  transition: 0.1s ease;
 }
 
 textarea {
@@ -44,7 +49,7 @@ textarea {
   color: rgb(189, 189, 189);
   font-family: poppins;
   resize: none;
-  width: 400px;
+  width: 450px;
   field-sizing: content;
   max-height: 250px;
   outline: none;
@@ -66,18 +71,13 @@ p {
   cursor: pointer;
 }
 
+#showNotes {
+  transition: 0.2s ease;
+}
+
 #barra {
   color: grey;
   cursor: auto;
-}
-
-i:hover, p:hover {
-  transform: scale(1.1);
-  transition: 0.3s ease;
-}
-
-#tags p {
-  font-size: 12px;
 }
 
 textarea::selection {
@@ -85,9 +85,53 @@ textarea::selection {
   color: #000; /* Color del texto seleccionado */
 }
 
+#d {
+  width: 100px;
+}
+
+#d a {
+  text-decoration: underline;
+  margin: 0 30px 0px 0px;
+  opacity: 0;
+  color: rgb(189, 189, 189);
+  font-size: 10px;
+  padding: 0px 0px 0px 15px;
+}
+
+#d p {
+  font-size: 12px;
+}
+
 #d:hover {
-  width: 150px;
+  width: 300px;
+  transition: 0.1s ease;
+}
+#d:hover a {
+  opacity: 1;
   transition: 0.3s ease;
+}
+
+#quote p {
+  font-size: 10px;
+}
+
+#close, #saveButton {
+  color: #a7a7a7;
+}
+
+::-webkit-scrollbar {
+  width: 5px; /* Ancho del scrollbar */
+  height: 5px; /* Altura del scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #000000; /* Fondo del track */
+  border-radius: 10px; /* Radio de borde */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color del thumb */
+  border-radius: 10px; /* Radio de borde */
 }
 
 /*# sourceMappingURL=style.css.map */
