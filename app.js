@@ -115,7 +115,7 @@ let rocketPress = () => {
 
 let overlayPress = () => {
     overlay.style.display = "none";
-    overlay.style.zIndex = "0";
+    // overlay.style.zIndex = "0";
 
     sun.style.display = "none";
     search.style.opacity = "0"

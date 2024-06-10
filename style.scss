@@ -142,7 +142,7 @@ textarea::selection {
     display: none;
     backdrop-filter: blur(2px);
     transition: 1s ease;
-    z-index: 0;
+    z-index: 9;
     transition: 0.3s ease;
 }
 
