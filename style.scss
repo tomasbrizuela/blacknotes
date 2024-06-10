@@ -64,7 +64,6 @@ textarea{
 
 #sun, #search{
     opacity: 0;
-    z-index: 9;
 }
 
 @media (max-width: 500px) {
@@ -118,7 +117,6 @@ textarea::selection {
 #d{
     width: 100px;
     z-index: 10;
-    transition: 0.1s ease;
 }
 
 #d a{

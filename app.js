@@ -77,7 +77,7 @@ let warning = () => {
     note.style.boxShadow = "0px 0px 10px rgb(167, 167, 167)";
     note.style.transform = "scale(1.05)";
     setTimeout(() => {
-        note.style.boxShadow = "0px 0px 3px rgb(167, 167, 167)";
+        note.style.boxShadow = "0px 0px 6px 0.5px rgb(167, 167, 167)";
         note.style.transform = "scale(1)";
     }, 300)
 }
@@ -97,7 +97,6 @@ let newNote = () => {
 
 let rocketPress = () => {
     overlay.style.display = "block";
-    overlay.style.zIndex = "7";
     d.style.width = "300px";
     let notasViejas = document.getElementsByClassName('aStyle');
     let cantidad = notasViejas.length;
@@ -112,14 +111,11 @@ let rocketPress = () => {
         element.style.opacity = "1";
         element.style.transition = "0.5s"
     }
-    
-
 }
 
 let overlayPress = () => {
     overlay.style.display = "none";
     overlay.style.zIndex = "0";
-
 
     sun.style.display = "none";
     search.style.opacity = "0"
@@ -135,16 +131,10 @@ let overlayPress = () => {
         element.style.opacity = "0";
         element.style.transition = "0.01s"
     }
-
-    
-
 }
 
 
-
 save.addEventListener('click', newNote);
-
-
 rocket.addEventListener('click',rocketPress);
 overlay.addEventListener('click', overlayPress);
 
