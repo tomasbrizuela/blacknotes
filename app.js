@@ -4,6 +4,7 @@ let text = document.querySelector('textarea');
 let fecha = document.querySelector('#date');
 let rocket = document.querySelector('#showNotes');
 let note = document.querySelector('#newNote');
+let overlay = document.querySelector('.overlay');
 
 let notes = [];
 
@@ -44,6 +45,7 @@ let showNoteList = () => {
         let p = document.createElement('p');
 
         p.textContent = item.title;
+        a.className = "aStyle";
         let content = item.text;
 
         oldNotes.appendChild(a);
@@ -52,20 +54,21 @@ let showNoteList = () => {
         a.addEventListener('click', function(){
             let texto = content;
             text.value = texto;
-            text.focus();
+            text.focus(); 
+            overlayPress();
         })
     })
 }
 
 let shadowEffect = () => {
     rocket.style.textShadow = "1px 1px 10px white";
-    rocket.style.transform = "scale(1.3)";
+    rocket.style.transform = "scale(1.4)";
     rocket.style.color = "white";
     setTimeout(() => {
         rocket.style.textShadow = "0px 0px 0px white";
         rocket.style.transform = "scale(1)";
         rocket.style.color = "#bdbdbd";
-    }, 1000)
+    }, 600)
 }
 
 let warning = () => {
@@ -90,5 +93,45 @@ let newNote = () => {
     
 }
 
+let rocketPress = () => {
+    overlay.style.display = "block";
+    overlay.style.zIndex = "7";
+    d.style.width = "300px";
+    let notasViejas = document.getElementsByClassName('aStyle');
+    let cantidad = notasViejas.length;
+
+    for (let i = 0; i <= cantidad; i++) {
+        let element = notasViejas[i];
+        element.style.opacity = "1";
+    }
+
+
+}
+
+let overlayPress = () => {
+    overlay.style.display = "none";
+    overlay.style.zIndex = "0";
+
+    d.style.width = "100px";
+    let notasViejas = document.getElementsByClassName('aStyle');
+    let cantidad = notasViejas.length;
+
+    for (let i = 0; i <= cantidad; i++) {
+        let element = notasViejas[i];
+        element.style.opacity = "0";
+    }
+}
+
+
 
 save.addEventListener('click', newNote);
+
+
+rocket.addEventListener('click',rocketPress);
+overlay.addEventListener('click', overlayPress);
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && e.ctrlKey){
+        newNote()
+    }
+})
