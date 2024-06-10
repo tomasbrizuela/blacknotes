@@ -5,6 +5,8 @@ let fecha = document.querySelector('#date');
 let rocket = document.querySelector('#showNotes');
 let note = document.querySelector('#newNote');
 let overlay = document.querySelector('.overlay');
+let sun = document.querySelector('#sun');
+let search = document.querySelector('#search');
 
 let notes = [];
 
@@ -27,7 +29,7 @@ let generateDate = () => {
 
 let saveNote = (x) => {
     let note = x;
-    let title = note.slice(0, 20) + "...";
+    let title = note.slice(0, 35) + "...";
 
     notes.push({
         title: title,
@@ -100,11 +102,17 @@ let rocketPress = () => {
     let notasViejas = document.getElementsByClassName('aStyle');
     let cantidad = notasViejas.length;
 
+    sun.style.display = "block";
+    sun.style.opacity = "1"
+    search.style.display = "block";
+    search.style.opacity = "1"
+
     for (let i = 0; i <= cantidad; i++) {
         let element = notasViejas[i];
         element.style.opacity = "1";
+        element.style.transition = "0.5s"
     }
-
+    
 
 }
 
@@ -112,6 +120,12 @@ let overlayPress = () => {
     overlay.style.display = "none";
     overlay.style.zIndex = "0";
 
+
+    sun.style.display = "none";
+    search.style.opacity = "0"
+
+    search.style.display = "none";
+    search.style.opacity = "0"
     d.style.width = "100px";
     let notasViejas = document.getElementsByClassName('aStyle');
     let cantidad = notasViejas.length;
@@ -119,7 +133,11 @@ let overlayPress = () => {
     for (let i = 0; i <= cantidad; i++) {
         let element = notasViejas[i];
         element.style.opacity = "0";
+        element.style.transition = "0.01s"
     }
+
+    
+
 }
 
 

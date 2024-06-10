@@ -59,13 +59,18 @@ textarea {
   scrollbar-width: thin;
 }
 
+#sun, #search {
+  opacity: 0;
+  z-index: 9;
+}
+
 @media (max-width: 500px) {
   #newNote {
     top: 20%;
   }
   textarea {
     width: 300px;
-    min-height: 150px;
+    min-height: 100px;
     max-height: 210px;
   }
 }
