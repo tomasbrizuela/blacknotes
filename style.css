@@ -117,7 +117,7 @@ textarea::selection {
   text-decoration: underline;
   margin: 0 30px 0px 0px;
   opacity: 0;
-  color: rgb(189, 189, 189);
+  color: #bdbdbd;
   font-size: 10px;
   padding: 0px 0px 0px 15px;
 }

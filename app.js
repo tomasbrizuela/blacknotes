@@ -28,17 +28,25 @@ let generateDate = () => {
     let fullDate = hours + ":" + minutes + " " + days + "/" + months + "/" + years
     return fullDate;
 }
+
+let noteToDatabase = (x) => {
+    let notesString = JSON.stringify(notes);
+    localStorage.setItem("noteListA1", notesString);
+}
+
 let saveNote = (x) => {
     let note = x;
-    let title = note.slice(0, 35) + "...";
+    let title = note.slice(0, 35);
 
     notes.push({
         title: title,
         text: note,
     })
 
+    noteToDatabase();
     text.value = "";
     text.focus();
+    return title;
 }
 let showNoteList = () => {
     notes.forEach((item) => {
@@ -48,6 +56,7 @@ let showNoteList = () => {
         p.textContent = item.title;
         a.className = "aStyle";
         let content = item.text;
+        console.log(content + ":");
 
         oldNotes.appendChild(a);
         a.appendChild(p);
@@ -60,6 +69,18 @@ let showNoteList = () => {
         })
     })
 }
+
+let onLoading = () => {
+    let noteList = localStorage.getItem("noteListA1");
+    console.log(noteList);
+
+    if(noteList != null)
+        notes = JSON.parse(noteList);
+        showNoteList();
+        console.log(notes);
+    }
+
+
 let shadowEffect = () => {
     if (theme === "dark") {
         rocket.style.textShadow = "1px 1px 10px white";
@@ -73,11 +94,11 @@ let shadowEffect = () => {
     } else {
         rocket.style.textShadow = "1px 1px 10px grey";
         rocket.style.transform = "scale(1.4)";
-        rocket.style.color = "#444444";
+        rocket.style.color = "black";
         setTimeout(() => {
             rocket.style.textShadow = "0px 0px 0px grey";
             rocket.style.transform = "scale(1)";
-            rocket.style.color = "#444444";
+            rocket.style.color = "#6d6d6d";
         }, 600)
     }
 
@@ -90,13 +111,39 @@ let warning = () => {
         note.style.transform = "scale(1)";
     }, 300)
 }
+
+let addNote = (title, text) => {
+    let a = document.createElement('a');
+    let p = document.createElement('p');
+
+    p.textContent = title;
+    a.className = "aStyle";
+    if(theme === "dark"){
+        a.style.color = "#bdbdbd";
+
+    } else {
+        a.style.color = "#444444"
+
+    }
+    let content = text;
+
+    oldNotes.appendChild(a);
+    a.appendChild(p);
+
+    a.addEventListener('click', function () {
+        let texto = content;
+        text.value = texto;
+        text.focus();
+        overlayPress();
+    })
+}
 let newNote = () => {
     let texto = text.value;
 
     if (texto != "") {
-        saveNote(texto);
+        let title = saveNote(texto);
+        addNote(title, text)
         shadowEffect();
-        showNoteList();
     } else {
         warning();
     }
@@ -113,7 +160,7 @@ let rocketPress = () => {
     search.style.display = "block";
     search.style.opacity = "1"
 
-    for (let i = 0; i <= cantidad; i++) {
+    for (let i = 0; i < cantidad; i++) {
         let element = notasViejas[i];
         element.style.opacity = "1";
         element.style.transition = "0.5s"
@@ -130,9 +177,10 @@ let overlayPress = () => {
     search.style.opacity = "0"
     d.style.width = "100px";
     let notasViejas = document.getElementsByClassName('aStyle');
+    console.log(notasViejas);
     let cantidad = notasViejas.length;
 
-    for (let i = 0; i <= cantidad; i++) {
+    for (let i = 0; i < cantidad; i++) {
         let element = notasViejas[i];
         element.style.opacity = "0";
         element.style.transition = "0.01s"
@@ -140,7 +188,7 @@ let overlayPress = () => {
     text.focus();
 }
 let changeThemeProperty = () => {
-    if(theme === "dark"){
+    if (theme === "dark") {
         theme = "ligth"
     } else {
         theme = "dark"
@@ -153,7 +201,13 @@ let changeThemeColor = () => {
         text.style.color = "#444444";
         document.documentElement.style.setProperty('--scrollBar', '#808080');
         changeThemeProperty();
-        rocket.style.color = "#444444";
+        rocket.style.color = "#6d6d6d";
+
+        let aElements = document.getElementsByClassName('aStyle');
+        console.log(aElements);
+        for (const note of aElements) {
+            note.style.color = "#444444";
+        }
         text.focus()
         overlayPress();
     } else {
@@ -162,10 +216,13 @@ let changeThemeColor = () => {
         text.style.color = "#bdbdbd";
         changeThemeProperty();
         rocket.style.color = "#bdbdbd";
+        let aElements = document.getElementsByClassName('aStyle');
+        console.log(aElements);
+        for (const note of aElements) {
+            note.style.color = "white";
+        }
         text.focus()
         overlayPress();
-        document.documentElement.style.setProperty('--scrollBar', '#000000');
-
     }
 }
 
@@ -180,3 +237,5 @@ document.addEventListener('keydown', function (e) {
         newNote()
     }
 })
+
+onLoading();
