@@ -7,6 +7,9 @@ let note = document.querySelector('#newNote');
 let overlay = document.querySelector('.overlay');
 let sun = document.querySelector('#sun');
 let search = document.querySelector('#search');
+let body = document.body;
+let scrollBar = document.querySelector("-webkit-scrollbar-track ");
+let theme = "dark";
 
 let notes = [];
 
@@ -25,8 +28,6 @@ let generateDate = () => {
     let fullDate = hours + ":" + minutes + " " + days + "/" + months + "/" + years
     return fullDate;
 }
-
-
 let saveNote = (x) => {
     let note = x;
     let title = note.slice(0, 35) + "...";
@@ -39,8 +40,6 @@ let saveNote = (x) => {
     text.value = "";
     text.focus();
 }
-
-
 let showNoteList = () => {
     notes.forEach((item) => {
         let a = document.createElement('a');
@@ -53,26 +52,36 @@ let showNoteList = () => {
         oldNotes.appendChild(a);
         a.appendChild(p);
 
-        a.addEventListener('click', function(){
+        a.addEventListener('click', function () {
             let texto = content;
             text.value = texto;
-            text.focus(); 
+            text.focus();
             overlayPress();
         })
     })
 }
-
 let shadowEffect = () => {
-    rocket.style.textShadow = "1px 1px 10px white";
-    rocket.style.transform = "scale(1.4)";
-    rocket.style.color = "white";
-    setTimeout(() => {
-        rocket.style.textShadow = "0px 0px 0px white";
-        rocket.style.transform = "scale(1)";
-        rocket.style.color = "#bdbdbd";
-    }, 600)
-}
+    if (theme === "dark") {
+        rocket.style.textShadow = "1px 1px 10px white";
+        rocket.style.transform = "scale(1.4)";
+        rocket.style.color = "white";
+        setTimeout(() => {
+            rocket.style.textShadow = "0px 0px 0px white";
+            rocket.style.transform = "scale(1)";
+            rocket.style.color = "#bdbdbd";
+        }, 600)
+    } else {
+        rocket.style.textShadow = "1px 1px 10px grey";
+        rocket.style.transform = "scale(1.4)";
+        rocket.style.color = "#444444";
+        setTimeout(() => {
+            rocket.style.textShadow = "0px 0px 0px grey";
+            rocket.style.transform = "scale(1)";
+            rocket.style.color = "#444444";
+        }, 600)
+    }
 
+}
 let warning = () => {
     note.style.boxShadow = "0px 0px 10px rgb(167, 167, 167)";
     note.style.transform = "scale(1.05)";
@@ -81,7 +90,6 @@ let warning = () => {
         note.style.transform = "scale(1)";
     }, 300)
 }
-
 let newNote = () => {
     let texto = text.value;
 
@@ -92,9 +100,8 @@ let newNote = () => {
     } else {
         warning();
     }
-    
-}
 
+}
 let rocketPress = () => {
     overlay.style.display = "block";
     d.style.width = "300px";
@@ -112,7 +119,6 @@ let rocketPress = () => {
         element.style.transition = "0.5s"
     }
 }
-
 let overlayPress = () => {
     overlay.style.display = "none";
     // overlay.style.zIndex = "0";
@@ -131,15 +137,46 @@ let overlayPress = () => {
         element.style.opacity = "0";
         element.style.transition = "0.01s"
     }
+    text.focus();
+}
+let changeThemeProperty = () => {
+    if(theme === "dark"){
+        theme = "ligth"
+    } else {
+        theme = "dark"
+    }
+}
+let changeThemeColor = () => {
+    if (theme === "dark") {
+        body.style.backgroundColor = "white";
+        text.style.backgroundColor = "white"
+        text.style.color = "#444444";
+        document.documentElement.style.setProperty('--scrollBar', '#808080');
+        changeThemeProperty();
+        rocket.style.color = "#444444";
+        text.focus()
+        overlayPress();
+    } else {
+        body.style.backgroundColor = "black";
+        text.style.backgroundColor = "black";
+        text.style.color = "#bdbdbd";
+        changeThemeProperty();
+        rocket.style.color = "#bdbdbd";
+        text.focus()
+        overlayPress();
+        document.documentElement.style.setProperty('--scrollBar', '#000000');
+
+    }
 }
 
-
+sun.addEventListener('click', changeThemeColor)
 save.addEventListener('click', newNote);
-rocket.addEventListener('click',rocketPress);
+rocket.addEventListener('click', rocketPress);
 overlay.addEventListener('click', overlayPress);
 
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' && e.ctrlKey){
+
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && e.ctrlKey) {
         newNote()
     }
 })
