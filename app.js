@@ -26,6 +26,7 @@ let generateDate = () => {
     let years = date.getFullYear();
 
     let fullDate = hours + ":" + minutes + " " + days + "/" + months + "/" + years
+
     return fullDate;
 }
 
@@ -56,7 +57,6 @@ let showNoteList = () => {
         p.textContent = item.title;
         a.className = "aStyle";
         let content = item.text;
-        console.log(content + ":");
 
         oldNotes.appendChild(a);
         a.appendChild(p);
@@ -72,12 +72,10 @@ let showNoteList = () => {
 
 let onLoading = () => {
     let noteList = localStorage.getItem("noteListA1");
-    console.log(noteList);
 
     if(noteList != null)
         notes = JSON.parse(noteList);
         showNoteList();
-        console.log(notes);
     }
 
 
@@ -112,7 +110,7 @@ let warning = () => {
     }, 300)
 }
 
-let addNote = (title, text) => {
+let addNote = (title, textoo) => {
     let a = document.createElement('a');
     let p = document.createElement('p');
 
@@ -125,7 +123,7 @@ let addNote = (title, text) => {
         a.style.color = "#444444"
 
     }
-    let content = text;
+    let content = textoo;
 
     oldNotes.appendChild(a);
     a.appendChild(p);
@@ -142,7 +140,7 @@ let newNote = () => {
 
     if (texto != "") {
         let title = saveNote(texto);
-        addNote(title, text)
+        addNote(title, texto)
         shadowEffect();
     } else {
         warning();
@@ -177,7 +175,6 @@ let overlayPress = () => {
     search.style.opacity = "0"
     d.style.width = "100px";
     let notasViejas = document.getElementsByClassName('aStyle');
-    console.log(notasViejas);
     let cantidad = notasViejas.length;
 
     for (let i = 0; i < cantidad; i++) {
@@ -204,7 +201,6 @@ let changeThemeColor = () => {
         rocket.style.color = "#6d6d6d";
 
         let aElements = document.getElementsByClassName('aStyle');
-        console.log(aElements);
         for (const note of aElements) {
             note.style.color = "#444444";
         }
@@ -217,7 +213,6 @@ let changeThemeColor = () => {
         changeThemeProperty();
         rocket.style.color = "#bdbdbd";
         let aElements = document.getElementsByClassName('aStyle');
-        console.log(aElements);
         for (const note of aElements) {
             note.style.color = "white";
         }
