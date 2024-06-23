@@ -7,6 +7,8 @@ let note = document.querySelector('#newNote');
 let overlay = document.querySelector('.overlay');
 let sun = document.querySelector('#sun');
 let search = document.querySelector('#search');
+let input = document.querySelector('input');
+let div = document.querySelector('#allNotes');
 let body = document.body;
 let scrollBar = document.querySelector("-webkit-scrollbar-track ");
 let theme = "dark";
@@ -49,8 +51,11 @@ let saveNote = (x) => {
     text.focus();
     return title;
 }
+
 let showNoteList = () => {
+    console.log(notes);
     notes.forEach((item) => {
+        
         let a = document.createElement('a');
         let p = document.createElement('p');
 
@@ -58,7 +63,7 @@ let showNoteList = () => {
         a.className = "aStyle";
         let content = item.text;
 
-        oldNotes.appendChild(a);
+        div.appendChild(a);
         a.appendChild(p);
 
         a.addEventListener('click', function () {
@@ -75,6 +80,7 @@ let onLoading = () => {
 
     if(noteList != null)
         notes = JSON.parse(noteList);
+    console.log("llegó hasta acá");
         showNoteList();
     }
 
@@ -101,6 +107,7 @@ let shadowEffect = () => {
     }
 
 }
+
 let warning = () => {
     note.style.boxShadow = "0px 0px 10px rgb(167, 167, 167)";
     note.style.transform = "scale(1.05)";
@@ -125,7 +132,7 @@ let addNote = (title, textoo) => {
     }
     let content = textoo;
 
-    oldNotes.appendChild(a);
+    div.appendChild(a);
     a.appendChild(p);
 
     a.addEventListener('click', function () {
@@ -135,6 +142,7 @@ let addNote = (title, textoo) => {
         overlayPress();
     })
 }
+
 let newNote = () => {
     let texto = text.value;
 
@@ -176,6 +184,7 @@ let overlayPress = () => {
     d.style.width = "100px";
     let notasViejas = document.getElementsByClassName('aStyle');
     let cantidad = notasViejas.length;
+    input.style.display = "block";
 
     for (let i = 0; i < cantidad; i++) {
         let element = notasViejas[i];
@@ -221,10 +230,25 @@ let changeThemeColor = () => {
     }
 }
 
+let openSearch = () => {
+    input.style.display = "block";
+}
+
 sun.addEventListener('click', changeThemeColor)
 save.addEventListener('click', newNote);
 rocket.addEventListener('click', rocketPress);
 overlay.addEventListener('click', overlayPress);
+search.addEventListener('click', openSearch);
+
+input.addEventListener('input', function(){
+    
+    if(input.value === ""){
+        onLoading();
+        console.log(input.value, "1")
+    } else {
+        restart();
+    }
+});
 
 
 document.addEventListener('keydown', function (e) {
@@ -232,5 +256,9 @@ document.addEventListener('keydown', function (e) {
         newNote()
     }
 })
+
+let restart = () => {
+    div.innerHTML = "";
+}
 
 onLoading();

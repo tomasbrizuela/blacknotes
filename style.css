@@ -61,6 +61,7 @@ textarea {
 
 #sun, #search {
   opacity: 0;
+  display: none;
 }
 
 @media (max-width: 500px) {
@@ -124,6 +125,13 @@ textarea::selection {
 
 #d p {
   font-size: 12px;
+}
+
+input {
+  display: none;
+  background-color: rgba(0, 0, 0, 0);
+  color: #bdbdbd;
+  outline: none;
 }
 
 .overlay {
